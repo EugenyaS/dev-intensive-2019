@@ -63,13 +63,14 @@ object Utils {
     }
 
     fun toInitials(firstName: String?, lastName: String?): String? {
-        var initials: String? = null
+        var initials: String? = ""
         if (!firstName.isNullOrBlank()) {
-            initials = firstName?.capitalize()?.first().toString()
+            initials += firstName?.capitalize()?.first().toString()
         }
         if (!lastName.isNullOrBlank()) {
             initials += lastName?.capitalize()?.first().toString()
         }
+        if (initials!!.isBlank()) initials=null
         return initials
     }
 
