@@ -1,5 +1,7 @@
 package ru.skillbranch.devintensive.utils
 
+import ru.skillbranch.devintensive.extensions.TimeUnits
+
 object Utils {
     fun parseFullName(fullName: String?): Pair<String?, String?> {
         var firstName: String?
@@ -70,9 +72,43 @@ object Utils {
         if (!lastName.isNullOrBlank()) {
             initials += lastName?.capitalize()?.first().toString()
         }
-        if (initials!!.isBlank()) initials=null
+        if (initials!!.isBlank()) initials = null
         return initials
     }
 
+    fun declension(unitCnt: String, units: TimeUnits): String {
+        val count="0$unitCnt"
+        var str = when (units) {
+            TimeUnits.SECOND -> {
+                when (count[count.lastIndex]) {
+                    '1' -> if (count[count.lastIndex - 1] == '1') "$unitCnt секунд" else "$unitCnt секунду"
+                    in '2'..'4' -> if (count[count.lastIndex - 1] == '1') "$unitCnt секунд" else "$unitCnt секунды"
+                    else -> "$unitCnt секунд"
+                }
+            }
+            TimeUnits.MINUTE -> {
+                when (count[count.lastIndex]) {
+                    '1' -> if (count[count.lastIndex - 1] == '1') "$unitCnt минут" else "$unitCnt минуту"
+                    in '2'..'4' -> if (count[count.lastIndex - 1] == '1') "$unitCnt минут" else "$unitCnt минуты"
+                    else -> "$unitCnt минут"
+                }
+            }
+            TimeUnits.HOUR -> {
+                when (count[count.lastIndex]) {
+                    '1' -> if (count[count.lastIndex - 1] == '1') "$unitCnt часов" else "$unitCnt час"
+                    in '2'..'4' -> if (count[count.lastIndex - 1] == '1') "$unitCnt часов" else "$unitCnt часа"
+                    else -> "$unitCnt часов"
+                }
+            }
+            TimeUnits.DAY -> {
+                when (count[count.lastIndex]) {
+                    '1' -> if (count[count.lastIndex - 1] == '1') "$unitCnt дней" else "$unitCnt день"
+                    in '2'..'4' -> if (count[count.lastIndex - 1] == '1') "$unitCnt дней" else "$unitCnt дня"
+                    else -> "$unitCnt дней"
+                }
+            }
+        }
+        return str
+    }
 
 }

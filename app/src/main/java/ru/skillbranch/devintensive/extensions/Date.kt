@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.extensions
 
+import ru.skillbranch.devintensive.utils.Utils
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.absoluteValue
@@ -40,28 +41,35 @@ fun Date.humanizeDiff(date: Date = Date()): String {
         if (resultTimeDay < 0) str = "более года назад" else str = "более чем через год"
     else
         if (resultTimeDay.absoluteValue <= 360 && resultTimeHour.absoluteValue > 26) {
-            if (resultTimeDay < 0) str = "${resultTimeDay.absoluteValue} дня назад" else str =
-                "через ${resultTimeDay.absoluteValue} дня"
+            if (resultTimeDay < 0) str =
+                "${Utils.declension("${resultTimeDay.absoluteValue}", TimeUnits.DAY)} назад" else str =
+                "через ${Utils.declension("${resultTimeDay.absoluteValue}", TimeUnits.DAY)}"
         } else
-            if (resultTimeHour.absoluteValue >= 26 && resultTimeHour.absoluteValue < 22) {
+            if (resultTimeHour.absoluteValue <= 26 && resultTimeHour.absoluteValue > 22) {
                 if (resultTimeHour < 0) str = "день назад" else str = "через день"
             } else
                 if (resultTimeHour.absoluteValue <= 22 && resultTimeMinute.absoluteValue > 75) {
-                    if (resultTimeHour < 0) str = "${resultTimeHour.absoluteValue} часа назад" else str =
-                        "через ${resultTimeHour.absoluteValue} часа"
+                    if (resultTimeHour < 0) str =
+                        "${Utils.declension("${resultTimeHour.absoluteValue}", TimeUnits.HOUR)} назад" else str =
+                        "через ${Utils.declension("${resultTimeHour.absoluteValue}", TimeUnits.HOUR)}"
                 } else
-                    if (resultTimeMinute.absoluteValue >= 75 && resultTimeMinute.absoluteValue < 45) {
+                    if (resultTimeMinute.absoluteValue <= 75 && resultTimeMinute.absoluteValue > 45) {
                         if (resultTimeMinute < 0) str = "час назад" else str = "через час"
                     } else
                         if (resultTimeMinute.absoluteValue <= 45 && resultTimeSecond.absoluteValue > 75) {
-                            if (resultTimeMinute < 0) str = "${resultTimeMinute.absoluteValue} минуты назад" else str =
-                                "через ${resultTimeMinute.absoluteValue} минуты"
+                            if (resultTimeMinute < 0) str =
+                                "${Utils.declension(
+                                    "${resultTimeMinute.absoluteValue}",
+                                    TimeUnits.MINUTE
+                                )} назад" else str =
+                                "через ${Utils.declension("${resultTimeMinute.absoluteValue}", TimeUnits.MINUTE)}"
                         } else
-                            if (resultTimeSecond.absoluteValue >= 75 && resultTimeSecond.absoluteValue < 45) {
+                            if (resultTimeSecond.absoluteValue <= 75 && resultTimeSecond.absoluteValue > 45) {
                                 if (resultTimeSecond < 0) str = "минуту назад" else str = "через минуту"
                             } else
-                                if (resultTimeSecond.absoluteValue >= 45 && resultTimeSecond.absoluteValue < 1) {
-                                    if (resultTimeSecond < 0) str = "секунду назад" else str = "через секунду"
+                                if (resultTimeSecond.absoluteValue <= 45 && resultTimeSecond.absoluteValue > 1) {
+                                    if (resultTimeSecond < 0) str = "несколько секунд назад" else str =
+                                        "через несколько секунд"
                                 } else str = "только что"
     return str
 }
