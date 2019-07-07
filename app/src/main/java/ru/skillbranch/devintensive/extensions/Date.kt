@@ -75,9 +75,47 @@ fun Date.humanizeDiff(date: Date = Date()): String {
 }
 
 enum class TimeUnits {
-    SECOND,
-    MINUTE,
-    HOUR,
-    DAY
+    SECOND {
+        override fun plural(value: Int): String {
+            val strValue = "0$value"
+            return when (strValue[strValue.lastIndex]) {
+                '1' -> if (strValue[strValue.lastIndex - 1] == '1') "секунд" else "секунду"
+                in '2'..'4' -> if (strValue[strValue.lastIndex - 1] == '1') "секунд" else "секунды"
+                else -> "секунд"
+            }
+        }
+    },
+    MINUTE {
+        override fun plural(value: Int): String {
+            val strValue = "0$value"
+            return when (strValue[strValue.lastIndex]) {
+                '1' -> if (strValue[strValue.lastIndex - 1] == '1') "минут" else "минуту"
+                in '2'..'4' -> if (strValue[strValue.lastIndex - 1] == '1') "минут" else "минуты"
+                else -> "минут"
+            }
+        }
+    },
+    HOUR {
+        override fun plural(value: Int): String {
+            val strValue = "0$value"
+            return when (strValue[strValue.lastIndex]) {
+                '1' -> if (strValue[strValue.lastIndex - 1] == '1') "часов" else "час"
+                in '2'..'4' -> if (strValue[strValue.lastIndex - 1] == '1') "часов" else "часа"
+                else -> "часов"
+            }
+        }
+    },
+    DAY {
+        override fun plural(value: Int): String {
+            val strValue = "0$value"
+            return when (strValue[strValue.lastIndex]) {
+                '1' -> if (strValue[strValue.lastIndex - 1] == '1') "дней" else "день"
+                in '2'..'4' -> if (strValue[strValue.lastIndex - 1] == '1') "дней" else "дня"
+                else -> "дней"
+            }
+        }
+    };
+
+    abstract fun plural(value: Int): String
 }
 
