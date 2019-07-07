@@ -79,9 +79,9 @@ enum class TimeUnits {
         override fun plural(value: Int): String {
             val strValue = "0$value"
             return when (strValue[strValue.lastIndex]) {
-                '1' -> if (strValue[strValue.lastIndex - 1] == '1') "секунд" else "секунду"
-                in '2'..'4' -> if (strValue[strValue.lastIndex - 1] == '1') "секунд" else "секунды"
-                else -> "секунд"
+                '1' -> if (strValue[strValue.lastIndex - 1] == '1') "$value секунд" else "$value секунду"
+                in '2'..'4' -> if (strValue[strValue.lastIndex - 1] == '1') "$value секунд" else "$value секунды"
+                else -> "$value секунд"
             }
         }
     },
@@ -89,9 +89,9 @@ enum class TimeUnits {
         override fun plural(value: Int): String {
             val strValue = "0$value"
             return when (strValue[strValue.lastIndex]) {
-                '1' -> if (strValue[strValue.lastIndex - 1] == '1') "минут" else "минуту"
-                in '2'..'4' -> if (strValue[strValue.lastIndex - 1] == '1') "минут" else "минуты"
-                else -> "минут"
+                '1' -> if (strValue[strValue.lastIndex - 1] == '1') "$value минут" else "$value минуту"
+                in '2'..'4' -> if (strValue[strValue.lastIndex - 1] == '1') "$value минут" else "$value минуты"
+                else -> "$value минут"
             }
         }
     },
@@ -99,9 +99,9 @@ enum class TimeUnits {
         override fun plural(value: Int): String {
             val strValue = "0$value"
             return when (strValue[strValue.lastIndex]) {
-                '1' -> if (strValue[strValue.lastIndex - 1] == '1') "часов" else "час"
-                in '2'..'4' -> if (strValue[strValue.lastIndex - 1] == '1') "часов" else "часа"
-                else -> "часов"
+                '1' -> if (strValue[strValue.lastIndex - 1] == '1') "$value часов" else "$value час"
+                in '2'..'4' -> if (strValue[strValue.lastIndex - 1] == '1') "$value часов" else "$value часа"
+                else -> "$value часов"
             }
         }
     },
