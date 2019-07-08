@@ -109,9 +109,9 @@ enum class TimeUnits {
         override fun plural(value: Int): String {
             val strValue = "0$value"
             return when (strValue[strValue.lastIndex]) {
-                '1' -> if (strValue[strValue.lastIndex - 1] == '1') "дней" else "день"
-                in '2'..'4' -> if (strValue[strValue.lastIndex - 1] == '1') "дней" else "дня"
-                else -> "дней"
+                '1' -> if (strValue[strValue.lastIndex - 1] == '1') "$value дней" else "$value день"
+                in '2'..'4' -> if (strValue[strValue.lastIndex - 1] == '1') "$value дней" else "$value дня"
+                else -> "$value дней"
             }
         }
     };
