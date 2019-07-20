@@ -14,7 +14,7 @@ fun Activity.isKeyboardOpen() : Boolean {
     return rootView.height - visibleBounds.height() > dpToPx(128F)
 }
 
-fun Activity.isKeyboardClose() = !this.isKeyboardOpen()
+fun Activity.isKeyboardClosed() = !this.isKeyboardOpen()
 
 fun Activity.hideKeyboard() {
    // if (isKeyboardClosed()) return
